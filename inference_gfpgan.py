@@ -4,6 +4,16 @@ import glob
 import numpy as np
 import os
 import torch
+
+try:
+    import torchvision.transforms.functional_tensor  # noqa: F401
+except ImportError:
+    try:
+        import torchvision.transforms.functional as functional
+        sys.modules["torchvision.transforms.functional_tensor"] = functional
+    except ImportError:
+        pass  # shrug...
+
 from basicsr.utils import imwrite
 
 from gfpgan import GFPGANer
